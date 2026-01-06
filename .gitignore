@@ -1,0 +1,38 @@
+# --- General PHP / Composer Files ---
+/vendor
+/composer.phar
+/log/*.log
+/cache/
+*.sql
+
+# --- Environment & Configuration ---
+# Store secrets in a safe location, not in Git
+.env
+.env.*
+.htaccess
+
+# --- Docker & Development Environment ---
+.dockerignore
+# Docker Compose can generate this on up/start
+docker-compose.override.yml
+docker-compose.local.yml
+
+# --- IDEs and OS Files ---
+# Ignore system-generated files
+.DS_Store
+Thumbs.db
+
+# Ignore common IDE files (e.g., VS Code, PHPStorm)
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# --- Project Specifics ---
+/uploads/*
+!/uploads/.gitkeep
+
+# --- Testing Artifacts ---
+.phpunit.result.cache
+.pest_tracker.cache
+/tests/.temp/
