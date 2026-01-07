@@ -55,4 +55,8 @@ RUN mkdir -p /var/www/html/uploads && \
 # Note: We'll change this to 'production' in the final K8s manifest
 ENV APP_ENV=dev
 
+# Update Apache DocumentRoot to point to the public folder
+RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
 EXPOSE 80
