@@ -3,7 +3,10 @@
 use App\Services\Uploader;
 
 // define a single source of truth for the path
-const UPLOAD_PATH = '/var/www/html/uploads';
+if (!defined('UPLOAD_PATH')) {
+    define('UPLOAD_PATH', getenv('UPLOAD_PATH') ?: '/var/www/html/uploads');
+}
+
 
 test('it can set and get the upload destination', function () {
     // 2. Act by creating an Uploader instance and setting the destination
