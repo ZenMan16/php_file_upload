@@ -7,6 +7,7 @@ class Security
     // Ensure session is started
     public function __construct()
     {
+        // Start session if not already started
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }

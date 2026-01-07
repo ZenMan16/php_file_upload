@@ -7,7 +7,7 @@ use App\Services\Security;
 // Configuration
 $uploadPath = getenv('UPLOAD_PATH') ?: __DIR__ . '/../uploads';
 $uploader = new Uploader($uploadPath);
-$security = new Security(); // This starts the session via the constructor
+$security = new Security();
 
 $message = '';
 $messageClass = '';

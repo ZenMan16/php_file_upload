@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-// var_dump("UPLOADER CLASS LOADED"); // <--- Add this
 
 class Uploader
 {
@@ -33,14 +32,11 @@ class Uploader
     {
         // 1. Strict check: Does it exist?
         if (!is_dir($this->destination)) {
-            // We log/dump exactly what is missing so we can fix the infrastructure
-            var_dump("INFRASTRUCTURE ERROR: Directory {$this->destination} does not exist.");
             return false;
         }
 
         // 2. Permission check: Can we write?
         if (!is_writable($this->destination)) {
-            var_dump("PERMISSION ERROR: Directory {$this->destination} is not writable.");
             return false;
         }
 
@@ -50,45 +46,37 @@ class Uploader
     // Method to move the uploaded file to the destination
     public function upload(string $tempPath, string $originalName): bool
     {
-        // var_dump("--- DEBUG START ---");
-        // var_dump("Temp Path: " . $tempPath);
-        // var_dump("Dest: " . $this->destination);
-
         if (!$this->isReady()) {
-            // var_dump("RESULT: isReady failed");
             return false;
         }
 
         $targetPath = $this->destination . '/' . $originalName;
         $res = $this->moveFile($tempPath, $targetPath);
 
-        // var_dump("RESULT: moveFile returned " . ($res ? 'TRUE' : 'FALSE'));
         return $res;
     }
 
     protected function moveFile(string $from, string $to): bool
     {
-        // var_dump("CHECKPOINT 1: Checking " . $from);
         $appEnv = getenv('APP_ENV') ?: 'production';
 
+        // In 'dev' environment, simulate move_uploaded_file
         if ($appEnv === 'dev') {
-            // var_dump("ENTERED TEST MODE LOGIC");
-
             if (!file_exists($from)) {
-                // var_dump("CHECKPOINT 2: SOURCE MISSING");
                 return false;
             }
 
-            // var_dump("CHECKPOINT 3: Copying to " . $to);
+            // In dev mode, use copy + unlink to simulate move_uploaded_file
             $success = @copy($from, $to);
 
+            // Check if copy was successful
             if (!$success) {
-                // $err = error_get_last();
-                // var_dump("CHECKPOINT 4: COPY FAILED! " . ($err['message'] ?? 'No PHP Error'));
                 return false;
             }
 
+            // Remove the original file
             unlink($from);
+
             return true;
         }
 
