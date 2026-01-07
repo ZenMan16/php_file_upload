@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-var_dump("UPLOADER CLASS LOADED"); // <--- Add this
+// var_dump("UPLOADER CLASS LOADED"); // <--- Add this
 
 class Uploader
 {
