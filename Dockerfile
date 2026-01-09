@@ -21,6 +21,12 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 WORKDIR /var/www/html
 
+# COPY code from the current folder into the image
+COPY . /var/www/html/
+
+# Set permissions so the web server can write to uploads
+RUN chown -R www-data:www-data /var/www/html
+
 # Expose FPM port
 EXPOSE 9000
 

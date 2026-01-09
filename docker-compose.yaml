@@ -5,8 +5,6 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: php_app
-    volumes:
-      - .:/var/www/html
     environment:
       - UPLOAD_PATH=/var/www/html/uploads
       - APP_ENV=dev
@@ -19,7 +17,5 @@ services:
     container_name: nginx_server
     ports:
       - "8081:80"
-    volumes:
-      - .:/var/www/html
     depends_on:
       - php_app_service
