@@ -24,6 +24,11 @@ WORKDIR /var/www/html
 # COPY code from the current folder into the image
 COPY . /var/www/html/
 
+# Install the PHP dependencies
+# --no-dev: Keeps the image slim for production (GCP style)
+# --optimize-autoloader: Makes the app faster
+RUN composer install --no-interaction --no-dev --optimize-autoloader
+
 # Set permissions so the web server can write to uploads
 RUN chown -R www-data:www-data /var/www/html
 
