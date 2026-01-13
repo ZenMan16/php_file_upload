@@ -1,0 +1,21 @@
+services:
+  # The PHP Processor (The "App")
+  php_app_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php_app
+    environment:
+      - UPLOAD_PATH=/var/www/html/uploads
+      - APP_ENV=dev
+
+  # The Web Server (Nginx)
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    container_name: nginx_server
+    ports:
+      - "8081:80"
+    depends_on:
+      - php_app_service
