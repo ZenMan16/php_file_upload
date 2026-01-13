@@ -1,6 +1,7 @@
 services:
   # The PHP Processor (The "App")
   php_app_service:
+    restart: always # ensure the container restarts automatically
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,6 +12,7 @@ services:
 
   # The Web Server (Nginx)
   web:
+    restart: always # ensure the container restarts automatically
     build:
       context: .
       dockerfile: Dockerfile.nginx
