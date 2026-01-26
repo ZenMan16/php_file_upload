@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Services\Uploader;
 
 // define a single source of truth for the path
